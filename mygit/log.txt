@@ -1,0 +1,11 @@
+Histórico do Gitpy
+==================
+
+[2026-05-22 08:39:44] Sistema mygit inicializado.
+[2026-05-22 08:41:33] Executou git status.
+[2026-05-22 08:43:51] Listou branches.
+[2026-05-22 08:53:01] Tentou criar branch: feature
+[2026-05-22 08:53:02] Branch criada com sucesso: feature
+[2026-05-22 08:54:21] Listou branches.
+[2026-05-22 08:55:02] Sistema mygit inicializado.
+[2026-05-22 08:55:02] Iniciando commit: primeiro commit
