@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gitpy Interface</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      background: #111;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .app {
+      width: 730px;
+      height: 426px;
+      display: flex;
+      background: linear-gradient(120deg, #8a4ff5 0%, #55d6d8 100%);
+      overflow: hidden;
+    }
+
+    .sidebar {
+      width: 184px;
+      height: 100%;
+      padding: 18px 0 14px 0;
+      border-right: 4px solid #111;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background: rgba(128, 80, 245, 0.35);
+    }
+
+    .sidebar-title {
+      padding-left: 6px;
+      font-size: 16px;
+      color: #050505;
+      margin-bottom: 28px;
+    }
+
+    .repo-list {
+      list-style: none;
+      padding-left: 23px;
+    }
+
+    .repo-item {
+      font-size: 16px;
+      color: #050505;
+      margin-bottom: 8px;
+      cursor: pointer;
+      width: fit-content;
+      transition: transform 0.15s ease, font-weight 0.15s ease;
+    }
+
+    .repo-item:hover {
+      transform: translateX(4px);
+      font-weight: bold;
+    }
+
+    .repo-item.active {
+      font-weight: bold;
+      text-decoration: underline;
+    }
+
+    .settings {
+      padding-left: 12px;
+      font-size: 34px;
+      cursor: pointer;
+      width: fit-content;
+      color: #050505;
+      line-height: 1;
+      transition: transform 0.2s ease;
+    }
+
+    .settings:hover {
+      transform: rotate(30deg);
+    }
+
+    .content {
+      flex: 1;
+      padding: 20px 18px;
+      color: #050505;
+    }
+
+    .folder-name {
+      font-size: 16px;
+      font-weight: normal;
+      margin-bottom: 26px;
+    }
+
+    .history-title {
+      font-size: 16px;
+      font-weight: normal;
+      margin-left: 15px;
+      margin-bottom: 22px;
+    }
+
+    .commit-list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-left: 34px;
+    }
+
+    .commit-card {
+      width: 230px;
+      height: 53px;
+      border: none;
+      border-radius: 999px;
+      background: #d9d9d9;
+      color: #050505;
+      font-size: 16px;
+      cursor: pointer;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .commit-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.18);
+    }
+
+    .commit-card:active {
+      transform: scale(0.98);
+    }
+
+    .empty-message {
+      margin-left: 34px;
+      color: #111;
+      opacity: 0.8;
+    }
+
+    @media (max-width: 760px) {
+      body {
+        align-items: flex-start;
+      }
+
+      .app {
+        width: 100vw;
+        height: 100vh;
+      }
+
+      .sidebar {
+        width: 160px;
+      }
+
+      .commit-list {
+        margin-left: 10px;
+      }
+
+      .commit-card {
+        width: 210px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="app">
+    <aside class="sidebar">
+      <div>
+        <h1 class="sidebar-title">repositorys</h1>
+
+        <ul class="repo-list" id="repoList">
+          <li class="repo-item active" data-repo="pasta1">pasta1</li>
+          <li class="repo-item" data-repo="pasta2">pasta2</li>
+          <li class="repo-item" data-repo="pasta3">pasta3</li>
+        </ul>
+      </div>
+
+      <div class="settings" title="Configurações">⚙</div>
+    </aside>
+
+    <section class="content">
+      <h2 class="folder-name" id="folderName">pasta1</h2>
+      <h3 class="history-title">Historico da pasta</h3>
+
+      <div class="commit-list" id="commitList"></div>
+    </section>
+  </main>
+
+  <script>
+    const repositories = {
+      pasta1: ["commit1", "commit2", "commit3", "commit4"],
+      pasta2: ["commit1", "commit2"],
+      pasta3: ["commit1", "commit2", "commit3"]
+    };
+
+    const repoItems = document.querySelectorAll(".repo-item");
+    const folderName = document.getElementById("folderName");
+    const commitList = document.getElementById("commitList");
+
+    function renderCommits(repoName) {
+      commitList.innerHTML = "";
+
+      const commits = repositories[repoName] || [];
+
+      if (commits.length === 0) {
+        commitList.innerHTML = `<p class="empty-message">Nenhum commit encontrado.</p>`;
+        return;
+      }
+
+      commits.forEach((commit) => {
+        const button = document.createElement("button");
+        button.className = "commit-card";
+        button.textContent = commit;
+
+        button.addEventListener("click", () => {
+          alert(`Commit selecionado: ${commit}`);
+        });
+
+        commitList.appendChild(button);
+      });
+    }
+
+    repoItems.forEach((item) => {
+      item.addEventListener("click", () => {
+        repoItems.forEach((repo) => repo.classList.remove("active"));
+        item.classList.add("active");
+
+        const repoName = item.dataset.repo;
+        folderName.textContent = repoName;
+        renderCommits(repoName);
+      });
+    });
+
+    renderCommits("pasta1");
+  </script>
+</body>
+</html>
