@@ -1,9 +1,0 @@
-Gitpyfuntion.py
-README.md
-gitpy.py
-pyproject.toml
-gitpy_cli.egg-info/PKG-INFO
-gitpy_cli.egg-info/SOURCES.txt
-gitpy_cli.egg-info/dependency_links.txt
-gitpy_cli.egg-info/entry_points.txt
-gitpy_cli.egg-info/top_level.txt
