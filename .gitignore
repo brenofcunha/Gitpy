@@ -1,5 +1,10 @@
 __pycache__/
 mygit/
+.venv/
+db.sqlite3
+gitpy_cli.egg-info/
+Repository local/
+.python - version
 *.pyc
 *.pyo
 *.pyd

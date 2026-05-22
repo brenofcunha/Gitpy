@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gitpy Interface</title>
+  <link rel="stylesheet" href="../static/style.css" />
+</head>
+
+<body>
+  <div class="page">
+    <main class="app">
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="logo">GP</div>
+          <div>
+            <h1>Gitpy</h1>
+            <p class="muted">repo manager</p>
+          </div>
+        </div>
+
+        <div class="sidebar-section">
+          <div class="section-title">Repositories</div>
+          <ul class="repo-list" id="repoList"></ul>
+        </div>
+
+        <div class="sidebar-footer">
+          <button class="ghost-btn" id="settingsBtn" type="button">Settings</button>
+        </div>
+      </aside>
+
+      <section class="content">
+        <header class="content-header">
+          <div>
+            <h2 class="folder-name" id="folderName">pasta1</h2>
+            <p class="subtitle">Historico da pasta</p>
+          </div>
+          <div class="actions">
+            <input class="search" id="commitSearch" type="search" placeholder="Buscar commit" />
+          </div>
+        </header>
+
+        <div class="content-grid">
+          <div class="commit-list" id="commitList"></div>
+          <aside class="details" id="logsPanel">
+            <div class="details-header">Logs</div>
+            <div class="details-body" id="logsBody">
+              <p class="muted">Logs do sistema aparecerao aqui.</p>
+            </div>
+          </aside>
+        </div>
+      </section>
+    </main>
+
+    <div class="toast" id="toast" aria-live="polite"></div>
+  </div>
+
+  <script src="../static/script.js"></script>
+</body>
+</html>
